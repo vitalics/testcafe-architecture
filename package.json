@@ -1,0 +1,29 @@
+{
+  "name": "testcafe-architecture",
+  "version": "1.0.0",
+  "description": "Architecture staff",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "node scripts/env",
+    "test": "testcafe chrome src/tests/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitalics/testcafe-architecture.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitalics/testcafe-architecture/issues"
+  },
+  "homepage": "https://github.com/vitalics/testcafe-architecture#readme",
+  "devDependencies": {
+    "@types/node": "^11.9.4",
+    "dotenv": "^6.2.0",
+    "testcafe": "^1.0.1",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3"
+  }
+}
