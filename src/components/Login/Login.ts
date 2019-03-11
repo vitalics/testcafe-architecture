@@ -1,16 +1,12 @@
-import { Selector, t } from "testcafe";
-import { useState } from "hooks";
+import { Form } from "components/common/form";
+import { UserModel } from "models";
 
-export function LoginComponent() {
-  const [getLoggedIn, setLoggedIn] = useState(false);
-  const email = Selector('#login');
-  return Object.freeze({
-    email,
-    loggedIn: getLoggedIn(),
+export class LoginComponent extends Form<UserModel> {
+  public submit(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
-    login: async () => {
-      await t.click(email)
-      setLoggedIn(true);
-    }
-  });
+  public fill(model: UserModel): void {
+    throw new Error("Method not implemented.");
+  }
 }

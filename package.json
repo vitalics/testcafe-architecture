@@ -20,6 +20,7 @@
   "homepage": "https://github.com/vitalics/testcafe-architecture#readme",
   "devDependencies": {
     "@types/node": "^11.9.4",
+    "csstype": "^2.6.3",
     "dotenv": "^6.2.0",
     "testcafe": "^1.0.1",
     "tslint": "^5.12.1",

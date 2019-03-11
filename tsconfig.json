@@ -3,6 +3,8 @@
         "module": "commonjs",
         "target": "es5",
         "baseUrl": "src",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "lib": [
             "dom",
             "es2015",
