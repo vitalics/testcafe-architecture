@@ -1,7 +1,8 @@
+import { Component } from "components/component";
 import { Element } from "typings/html";
 
 export interface TableAPI {
-  getHead: Element;
-  getBody: Element;
-  getElement(row: number): Element;
+  getTHead?(): Element;
+  getTBody?(): Element;
+  getElement?<C extends Component>(row: number): Element | C;
 }

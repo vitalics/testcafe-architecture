@@ -7,4 +7,7 @@ export interface FindAPI {
 
   byTagName?<K extends string, C extends Component>(tag: K): Element | C;
   byTagName?<K extends keyof HTMLElementTagNameMap, C extends Component>(tag: K): Element | C;
+
+  by?<R>(criteria: boolean): R;
+  by?<R>(fn: () => boolean): R;
 }

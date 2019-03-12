@@ -1,11 +1,15 @@
 import { Page } from "../page";
-import { LoginComponent } from "components/Login";
+import { PositionListComponent } from "components/Position";
+import { OpportunitiesComponent } from "components/Opportunities";
 
 export class HomePage extends Page {
-  public loginComponent = new LoginComponent();
-  public async login() {
-    const a = await this.loginComponent.getCSSProperty('border-bottom-left-radius');
-    a.toLocaleLowerCase();
-    this.loginComponent.submit();
+  public readonly positions = new PositionListComponent();
+
+  public readonly opportunities = new OpportunitiesComponent();
+
+  public async choosePosition(positionName: string) {
+    const position = this.positions.getComponent(1);
+    const isHot = await position.isHot();
+    return isHot;
   }
 }
