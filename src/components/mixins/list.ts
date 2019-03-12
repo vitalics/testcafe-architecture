@@ -1,4 +1,4 @@
-import { Elements, Element } from "typings/element";
+import { Elements, Element } from "typings/html";
 
 export interface ListAPI {
   getElements(): Elements;

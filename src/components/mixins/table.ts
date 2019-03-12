@@ -1,4 +1,4 @@
-import { Element } from "typings/element";
+import { Element } from "typings/html";
 
 export interface TableAPI {
   getHead: Element;

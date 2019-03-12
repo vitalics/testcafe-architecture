@@ -1,6 +1,6 @@
 import { Component } from 'components/component';
 import { ListAPI } from 'components/mixins/list';
-import { Element, Elements } from 'typings/element';
+import { Element, Elements } from 'typings/html';
 
 export abstract class List extends Component implements ListAPI {
   public abstract getElements(): Elements;

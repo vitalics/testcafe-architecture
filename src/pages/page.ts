@@ -4,9 +4,9 @@ import { useEnvironment } from "hooks";
 const { BASE_URL } = useEnvironment();
 
 export abstract class Page {
-  protected baseUrl = BASE_URL;
+  protected readonly baseUrl = BASE_URL;
 
-  public constructor(protected url: string = '/') { }
+  public constructor(protected readonly url: string = '/') { }
 
   public async open(url: string = this.baseUrl + this.url): Promise<void> {
     await t.navigateTo(url);
