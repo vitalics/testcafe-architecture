@@ -133,14 +133,13 @@ export abstract class Component implements ComponentAPI {
   }
 
   public static cast<CI extends new (rootOrSelector?: Element | string) => C, C extends Component>(instance: CI, rootOrSelector?: Element | string): InstanceType<CI> {
-    return cast(instance as any, rootOrSelector);
+    return cast(instance, rootOrSelector);
   }
 
   public cast<CI extends new (rootOrSelector?: Element | string) => C, C extends Component>(instance: CI, rootOrSelector?: Element | string): InstanceType<CI> {
-    return cast(instance as any, rootOrSelector);
+    return cast(instance, rootOrSelector);
   }
 }
-
 
 export interface ComponentAPI extends Required<FindAPI> {
   innerText: Promise<string>;
