@@ -3,6 +3,7 @@ import { Selector } from "testcafe";
 import { CSS, CSSRecord } from "typings/html/css";
 import { CustomAttribute, Attribute } from "typings/html/attribute";
 import { Element } from "typings/html/element";
+
 import { FindAPI } from "./mixins/find";
 
 export abstract class Component implements ComponentAPI {
@@ -22,7 +23,7 @@ export abstract class Component implements ComponentAPI {
     return parentSelector.find(`${subSelector}`);
   }
 
-  public async getCSS<K extends keyof CSS>(cssProp: K, selector = this.rootSelector): Promise<CSS[K]> {
+  public async getCSSProperty<K extends keyof CSS>(cssProp: K, selector = this.rootSelector): Promise<CSS[K]> {
     return await selector.getStyleProperty(cssProp);
   }
 
@@ -40,9 +41,9 @@ export abstract class Component implements ComponentAPI {
     return this.rootSelector.tagName;
   }
 
-  byTagName<K extends string, C extends Component>(tag: K, element?: Element): C | Element;
-  byTagName<K extends keyof HTMLElementTagNameMap, C extends Component>(tag: K, element?: Element): C | Element;
-  byTagName(tag: any, element = this.rootSelector) {
+  public byTagName<K extends string>(tag: K, element?: Element): Element;
+  public byTagName<K extends keyof HTMLElementTagNameMap>(tag: K, element?: Element): Element;
+  public byTagName(tag: any, element = this.rootSelector) {
     return this.$(tag, element);
   }
 }
@@ -51,9 +52,11 @@ export interface ComponentAPI extends Required<FindAPI> {
   innerText: Promise<string>;
   exists: Promise<boolean>;
   visible: Promise<boolean>;
-  getCSS<K extends keyof CSS>(cssProp: K, selector?: Element): Promise<CSS[K]>;
+  getCSSProperty<K extends keyof CSS>(cssProp: K, selector?: Element): Promise<CSS[K]>;
   getStyles(): Promise<CSSRecord>;
   getAttribute<K extends keyof Attribute>(attrName: K, selector?: Element): Promise<Attribute[K]>;
   getAttribute<K extends keyof CustomAttribute>(attrName: K, selector?: Element): Promise<CustomAttribute[K]>;
   getTagName(): Promise<string>;
 }
+
+let a: Component;
