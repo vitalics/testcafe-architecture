@@ -1,4 +1,4 @@
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { PositionAPI } from "components/mixins/position";
 import { Element } from "typings/html";
 

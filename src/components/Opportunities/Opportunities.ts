@@ -1,5 +1,5 @@
 import { RelocationComponent } from "./Relocation";
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { ListAPI } from "components/mixins";
 import { GrowComponent } from "./Grow";
 

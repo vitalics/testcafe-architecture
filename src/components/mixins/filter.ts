@@ -1,4 +1,4 @@
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { Element } from "typings/html";
 
 export interface FilterAPI {

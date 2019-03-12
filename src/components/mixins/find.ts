@@ -1,13 +1,7 @@
 import { Element } from "typings/html";
-import { Component } from "../component";
+import { Component } from "../Component";
 
 export interface FindAPI {
   $<C extends Component>(cssSelector: string, element?: Element): Element | C;
   $$<C extends Component>(cssSelector: string, element?: Element): Element | C;
-
-  byTagName?<K extends string, C extends Component>(tag: K): Element | C;
-  byTagName?<K extends keyof HTMLElementTagNameMap, C extends Component>(tag: K): Element | C;
-
-  by?<R>(criteria: boolean): R;
-  by?<R>(fn: () => boolean): R;
 }

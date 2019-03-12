@@ -5,7 +5,9 @@ import { CustomAttribute, Attribute } from "typings/html/attribute";
 import { Element } from "typings/html/element";
 
 import { FindAPI } from "./mixins/find";
-import { WithoutProp as ExcludeProp } from "typings/common";
+import { GrowComponent } from "./Opportunities/Grow";
+import { PositionComponent } from "./Position/Position";
+import { cast } from 'utils/cast';
 
 export abstract class Component implements ComponentAPI {
   protected readonly rootSelector: Element;
@@ -121,21 +123,6 @@ export abstract class Component implements ComponentAPI {
   }
 
   /**
-   * find a sub element by tag name
-   * @internal
-   * @template K
-   * @param {K} tag
-   * @param {Element} [element]
-   * @returns {Element}
-   * @memberof Component
-   */
-  public byTagName<K extends string>(tag: K, element?: Element): Element;
-  public byTagName<K extends keyof HTMLElementTagNameMap>(tag: K, element?: Element): Element;
-  public byTagName(tag: any, element = this.rootSelector) {
-    return this.$(tag, element);
-  }
-
-  /**
    * get all class names for the root element
    * @internal
    * @returns
@@ -144,11 +131,18 @@ export abstract class Component implements ComponentAPI {
   public async getClassNames() {
     return this.rootSelector.classNames;
   }
+
+  public static cast<CI extends new (rootOrSelector?: Element | string) => C, C extends Component>(instance: CI, rootOrSelector?: Element | string): InstanceType<CI> {
+    return cast(instance as any, rootOrSelector);
+  }
+
+  public cast<CI extends new (rootOrSelector?: Element | string) => C, C extends Component>(instance: CI, rootOrSelector?: Element | string): InstanceType<CI> {
+    return cast(instance as any, rootOrSelector);
+  }
 }
 
-type FindAPIExcludeBy = ExcludeProp<FindAPI, 'by'>
 
-export interface ComponentAPI extends Required<FindAPIExcludeBy> {
+export interface ComponentAPI extends Required<FindAPI> {
   innerText: Promise<string>;
   exists: Promise<boolean>;
   visible: Promise<boolean>;
@@ -161,3 +155,5 @@ export interface ComponentAPI extends Required<FindAPIExcludeBy> {
 }
 
 let a: Component;
+
+let b = GrowComponent.cast(PositionComponent);

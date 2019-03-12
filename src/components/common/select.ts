@@ -1,4 +1,4 @@
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { SelectAPI } from "components/mixins";
 
 export abstract class Select extends Component implements SelectAPI {

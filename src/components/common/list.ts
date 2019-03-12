@@ -1,4 +1,4 @@
-import { Component } from 'components/component';
+import { Component } from "components/Component";
 import { ListAPI } from 'components/mixins/list';
 import { Element } from 'typings/html';
 

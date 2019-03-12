@@ -1,4 +1,4 @@
-import { Component } from 'components/component';
+import { Component } from "components/Component";
 import { SubmitAPI } from 'components/mixins/submit';
 import { Model } from 'models/model';
 

@@ -1,4 +1,4 @@
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { InputAPI } from "components/mixins";
 
 export abstract class Input extends Component implements InputAPI {

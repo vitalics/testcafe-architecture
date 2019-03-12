@@ -1,7 +1,7 @@
 import { List } from "components/common/List";
 
 import { PositionComponent } from "./position";
-import { Component } from "components/component";
+import { Component } from "components/Component";
 import { ListAPI } from "components/mixins";
 
 export class PositionListComponent extends Component implements ListAPI<PositionComponent> {
