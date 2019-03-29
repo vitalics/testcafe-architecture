@@ -2,6 +2,11 @@ import { Component } from "components/Component";
 import { InputAPI } from "components/mixins";
 
 export abstract class Input extends Component implements InputAPI {
-  public readonly value = this.rootSelector.value;
+  public constructor(protected readonly selector: string = 'input') {
+    super(selector);
+  }
+  public async getValue() {
+    return this.root.value;
+  }
   abstract type(value: string): Promise<void>;
 }

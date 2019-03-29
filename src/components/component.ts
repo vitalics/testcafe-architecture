@@ -10,34 +10,36 @@ import { PositionComponent } from "./Position/Position";
 import { cast } from 'utils/cast';
 
 export abstract class Component implements ComponentAPI {
-  protected readonly rootSelector: Element;
+  protected readonly root: Element;
 
   /**
    * return sub text of the component root
    * @internal
    * @memberof Component
    */
-  public readonly innerText = this.rootSelector.innerText;
+  public readonly innerText = this.root.innerText;
 
   /**
    * return existing of the component
    * @internal
    * @memberof Component
    */
-  public readonly exists = this.rootSelector.exists;
+  public isExists() {
+    return this.root.exists;
+  }
 
   /**
    * return visibility of the component
    * @internal
    * @memberof Component
    */
-  public readonly visible = this.rootSelector.visible;
+  public readonly visible = this.root.visible;
 
-  public constructor(protected readonly rootOrSelector: string | Element = 'body') {
+  public constructor(private readonly rootOrSelector: string | Element = 'body') {
     if (typeof rootOrSelector === 'string') {
-      this.rootSelector = Selector(rootOrSelector);
+      this.root = Selector(rootOrSelector);
     } else {
-      this.rootSelector = rootOrSelector;
+      this.root = rootOrSelector;
     }
   }
 
@@ -58,7 +60,7 @@ export abstract class Component implements ComponentAPI {
    * @returns
    * @memberof Component
    */
-  public $(subSelector: string, parentSelector = this.rootSelector) {
+  public $(subSelector: string, parentSelector = this.root) {
     return parentSelector.find(`${subSelector}`);
   }
 
@@ -70,7 +72,7 @@ export abstract class Component implements ComponentAPI {
    * @returns
    * @memberof Component
    */
-  public $$(subSelector: string, parentSelector = this.rootSelector) {
+  public $$(subSelector: string, parentSelector = this.root) {
     return parentSelector.find(`${subSelector}`);
   }
 
@@ -83,7 +85,7 @@ export abstract class Component implements ComponentAPI {
    * @returns {Promise<CSS[K]>}
    * @memberof Component
    */
-  public async getCSSProperty<K extends keyof CSS>(cssProp: K, selector = this.rootSelector): Promise<CSS[K]> {
+  public async getCSSProperty<K extends keyof CSS>(cssProp: K, selector = this.root): Promise<CSS[K]> {
     return await selector.getStyleProperty(cssProp);
   }
 
@@ -94,7 +96,7 @@ export abstract class Component implements ComponentAPI {
    * @memberof Component
    */
   public getStyles(): Promise<CSSRecord> {
-    return this.rootSelector.style;
+    return this.root.style;
   }
 
   /**
@@ -108,7 +110,7 @@ export abstract class Component implements ComponentAPI {
    */
   public async getAttribute<K extends keyof Attribute>(attrName: K, selector?: Element): Promise<Attribute[K]>
   public async getAttribute<K extends keyof CustomAttribute>(attrName: K, selector?: Element): Promise<CustomAttribute[K]>
-  public async getAttribute<K extends keyof CustomAttribute>(attrName: K, selector = this.rootSelector): Promise<CustomAttribute[K]> {
+  public async getAttribute<K extends keyof CustomAttribute>(attrName: K, selector = this.root): Promise<CustomAttribute[K]> {
     return await selector.getAttribute(attrName);
   }
 
@@ -119,7 +121,7 @@ export abstract class Component implements ComponentAPI {
    * @memberof Component
    */
   public getTagName(): Promise<string> {
-    return this.rootSelector.tagName;
+    return this.root.tagName;
   }
 
   /**
@@ -129,7 +131,7 @@ export abstract class Component implements ComponentAPI {
    * @memberof Component
    */
   public async getClassNames() {
-    return this.rootSelector.classNames;
+    return this.root.classNames;
   }
 
   public static cast<CI extends new (rootOrSelector?: Element | string) => C, C extends Component>(instance: CI, rootOrSelector?: Element | string): InstanceType<CI> {
@@ -143,7 +145,7 @@ export abstract class Component implements ComponentAPI {
 
 export interface ComponentAPI extends Required<FindAPI> {
   innerText: Promise<string>;
-  exists: Promise<boolean>;
+  isExists(): Promise<boolean>;
   visible: Promise<boolean>;
   getCSSProperty<K extends keyof CSS>(cssProp: K, selector?: Element): Promise<CSS[K]>;
   getStyles(): Promise<CSSRecord>;

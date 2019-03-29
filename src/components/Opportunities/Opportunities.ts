@@ -10,7 +10,7 @@ export class OpportunitiesComponent extends Component implements ListAPI<Compone
     super('main');
   }
 
-  getComponent(nth: number) {
+  get(nth: number): Components {
     switch (nth) {
       case 0:
         return new RelocationComponent();
